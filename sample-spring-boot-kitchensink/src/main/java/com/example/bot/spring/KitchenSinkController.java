@@ -254,7 +254,10 @@ public class KitchenSinkController {
                                         Arrays.asList(new TextMessage(
                                                               "Display name: " + profile.getDisplayName()),
                                                       new TextMessage("Status message: "
-                                                                      + profile.getStatusMessage()))
+                                                                      + profile.getStatusMessage()),
+                                                      new TextMessage("User ID: "
+                                                                      + userId)
+                                                     )
                                 );
 
                             });
@@ -307,7 +310,7 @@ public class KitchenSinkController {
                 this.reply(replyToken, templateMessage);
                 break;
             }
-            case "carousel": {
+            case "default_carousel": {
                 String imageUrl = createUri("/static/buttons/1040.jpg");
                 CarouselTemplate carouselTemplate = new CarouselTemplate(
                         Arrays.asList(
@@ -410,11 +413,11 @@ public class KitchenSinkController {
                 ));
                 break;
             default:
-                log.info("Returns echo message {}: {}", replyToken, text);
-                this.replyText(
-                        replyToken,
-                        text
-                );
+                log.info("Returns (no, it is commented) echo message {}: {}", replyToken, text);
+                //this.replyText(
+                        //replyToken,
+                        //text
+                //);
                 break;
         }
     }
