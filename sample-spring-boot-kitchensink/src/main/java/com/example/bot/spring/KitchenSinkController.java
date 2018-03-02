@@ -124,7 +124,7 @@ public class KitchenSinkController {
                     reply(((MessageEvent) event).getReplyToken(),
                           new ImageMessage(jpg.getUri(), jpg.getUri()));
                 });
-}
+    }
 
     @EventMapping
     public void handleAudioMessageEvent(MessageEvent<AudioMessageContent> event) throws IOException {
@@ -135,7 +135,7 @@ public class KitchenSinkController {
                     DownloadedContent mp4 = saveContent("mp4", responseBody);
                     reply(event.getReplyToken(), new AudioMessage(mp4.getUri(), 100));
                 });
-}
+    }
 
     @EventMapping
     public void handleVideoMessageEvent(MessageEvent<VideoMessageContent> event) throws IOException {
@@ -152,7 +152,7 @@ public class KitchenSinkController {
                     reply(((MessageEvent) event).getReplyToken(),
                           new VideoMessage(mp4.getUri(), previewImg.uri));
                 });
-}
+    }
 
     @EventMapping
     public void handleUnfollowEvent(UnfollowEvent event) {
@@ -183,7 +183,7 @@ public class KitchenSinkController {
     public void handleBeaconEvent(BeaconEvent event) {
         String replyToken = event.getReplyToken();
         //this.replyText(replyToken, "Got beacon message " + event.getBeacon().getHwid());
-}
+    }
 
     @EventMapping
     public void handleOtherEvent(Event event) {
@@ -226,13 +226,13 @@ public class KitchenSinkController {
             throw new RuntimeException(e);
         }
         messageConsumer.accept(response);
-}
+    }
 
     private void handleSticker(String replyToken, StickerMessageContent content) {
-        //reply(replyToken, new StickerMessage(
-                //content.getPackageId(), content.getStickerId())
-        //);
-}
+        reply(replyToken, new StickerMessage(
+                content.getPackageId(), content.getStickerId())
+        );
+    }
 
     private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws Exception {
