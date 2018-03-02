@@ -269,9 +269,7 @@ public class KitchenSinkController {
                                         Arrays.asList(new TextMessage(
                                                               "Display name: " + profile.getDisplayName()),
                                                       new TextMessage("Status message: "
-                                                                      + profile.getStatusMessage()),
-                                                      new TextMessage("User ID: "
-                                                                      + userId)
+                                                                      + profile.getStatusMessage())
                                                      )
                                 );
 
@@ -296,6 +294,7 @@ public class KitchenSinkController {
             }
             //CUSTOM COMMANDS START HERE
             
+            // Display command list in PM
             case "help": {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
@@ -306,18 +305,19 @@ public class KitchenSinkController {
                     //this.replyText(replyToken, "");
                 } else {
                     //if PM
-                    this.replyText(replyToken, "help\r\nnewLineTest");
+                    this.replyText(replyToken, "help\r\nsomeOtherCommand");
                 }
                 break;
             }
+            // Display command list in Groups or Rooms
             case "!help": {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
                     //if GROUP
-                    //this.replyText(replyToken, "");
+                    this.replyText(replyToken, "!help\r\n!kick");
                 } else if (source instanceof RoomSource) {
                     //if ROOM
-                    //this.replyText(replyToken, "");
+                    this.replyText(replyToken, "!help\r\n!kick");
                 } else {
                     //if PM
                     //this.replyText(replyToken, "");
