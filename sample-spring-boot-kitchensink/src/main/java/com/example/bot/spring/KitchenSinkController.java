@@ -156,7 +156,7 @@ public class KitchenSinkController {
 
     @EventMapping
     public void handleUnfollowEvent(UnfollowEvent event) {
-        log.info("User {} unfollowed this bot.", event);
+        //log.info("User {} unfollowed this bot.", event);
     }
 
     @EventMapping
@@ -187,7 +187,7 @@ public class KitchenSinkController {
 
     @EventMapping
     public void handleOtherEvent(Event event) {
-        log.info("Received message(Ignored): {}", event);
+        //log.info("Received message(Ignored): {}", event);
     }
 
     private void reply(@NonNull String replyToken, @NonNull Message message) {
@@ -209,8 +209,8 @@ public class KitchenSinkController {
         if (replyToken.isEmpty()) {
             throw new IllegalArgumentException("replyToken must not be empty");
         }
-        if (message.length() > 2000) {
-            message = message.substring(0, 2000 - 2) + "……";
+        if (message.length() > 1000) {
+            message = message.substring(0, 1000 - 2) + "……";
         }
         this.reply(replyToken, new TextMessage(message));
     }
