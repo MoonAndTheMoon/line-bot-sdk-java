@@ -156,7 +156,7 @@ public class KitchenSinkController {
 
     @EventMapping
     public void handleUnfollowEvent(UnfollowEvent event) {
-        //log.info("User {} unfollowed this bot.", event);
+        log.info("User {} unfollowed this bot.", event);
     }
 
     @EventMapping
@@ -187,7 +187,7 @@ public class KitchenSinkController {
 
     @EventMapping
     public void handleOtherEvent(Event event) {
-        //log.info("Received message(Ignored): {}", event);
+        log.info("Received message(Ignored): {}", event);
     }
 
     private void reply(@NonNull String replyToken, @NonNull Message message) {
@@ -222,7 +222,7 @@ public class KitchenSinkController {
             response = lineMessagingClient.getMessageContent(messageId)
                                           .get();
         } catch (InterruptedException | ExecutionException e) {
-            //reply(replyToken, new TextMessage("Cannot get image: " + e.getMessage()));
+            reply(replyToken, new TextMessage("Cannot get image: " + e.getMessage()));
             throw new RuntimeException(e);
         }
         messageConsumer.accept(response);
@@ -237,10 +237,10 @@ public class KitchenSinkController {
     private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws Exception {
         String text = content.getText();
-        String text2 = text.toLowerCase();
+        //String text2 = text.toLowerCase();
 
         log.info("Got text message from {}: {}", replyToken, text);
-        switch (text2) {
+        switch (text) {
             case "__profile": {
                 String userId = event.getSource().getUserId();
                 if (userId != null) {
@@ -263,7 +263,7 @@ public class KitchenSinkController {
 
                             });
                 } else {
-                    //this.replyText(replyToken, "Bot can't use profile API without user ID");
+                    this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
                 break;
             }
@@ -287,13 +287,13 @@ public class KitchenSinkController {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
                     //if GROUP
-                    //this.replyText(replyToken, "");
+                    this.replyText(replyToken, "");
                 } else if (source instanceof RoomSource) {
                     //if ROOM
-                    //this.replyText(replyToken, "");
+                    this.replyText(replyToken, "");
                 } else {
                     //if PM
-                    this.replyText(replyToken, "help\r\nsomeOtherCommand");
+                    this.replyText(replyToken, "help, someOtherCommand");
                 }
                 break;
             }
@@ -302,13 +302,13 @@ public class KitchenSinkController {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
                     //if GROUP
-                    this.replyText(replyToken, "!help\r\n!kick");
+                    this.replyText(replyToken, "!help, !kick");
                 } else if (source instanceof RoomSource) {
                     //if ROOM
-                    this.replyText(replyToken, "!help\r\n!kick");
+                    this.replyText(replyToken, "!help, !kick");
                 } else {
                     //if PM
-                    //this.replyText(replyToken, "");
+                    this.replyText(replyToken, "");
                 }
                 break;
             }
@@ -322,7 +322,7 @@ public class KitchenSinkController {
                     this.replyText(replyToken, "This wasn't a real group anyway.");
                     lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get();
                 } else {
-                    //this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+                    this.replyText(replyToken, "Bot can't leave from 1:1 chat");
                 }
                 break;
             }
