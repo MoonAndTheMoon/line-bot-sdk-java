@@ -156,21 +156,19 @@ public class KitchenSinkController {
 
     @EventMapping
     public void handleUnfollowEvent(UnfollowEvent event) {
-        log.info("User {} unfollowed this bot.", event);
+        log.info("unfollowed this bot: {}", event);
     }
 
     @EventMapping
     public void handleFollowEvent(FollowEvent event) {
         String replyToken = event.getReplyToken();
-        //When the bot is either added as friend or unblocked
-        this.replyText(replyToken, "You can type \"help\" for a list of available commands.");
+        this.replyText(replyToken, "Got followed event");
     }
 
     @EventMapping
     public void handleJoinEvent(JoinEvent event) {
         String replyToken = event.getReplyToken();
-        //When the bot joins a Group or Room
-        this.replyText(replyToken, "You can type \"!help\" for a list of available commands.");
+        this.replyText(replyToken, "Joined " + event.getSource());
     }
 
     @EventMapping
@@ -182,7 +180,7 @@ public class KitchenSinkController {
     @EventMapping
     public void handleBeaconEvent(BeaconEvent event) {
         String replyToken = event.getReplyToken();
-        //this.replyText(replyToken, "Got beacon message " + event.getBeacon().getHwid());
+        this.replyText(replyToken, "Got beacon message " + event.getBeacon().getHwid());
     }
 
     @EventMapping
@@ -237,7 +235,6 @@ public class KitchenSinkController {
     private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws Exception {
         String text = content.getText();
-        //String text2 = text.toLowerCase();
 
         log.info("Got text message from {}: {}", replyToken, text);
         switch (text) {
@@ -257,7 +254,9 @@ public class KitchenSinkController {
                                         Arrays.asList(new TextMessage(
                                                               "Display name: " + profile.getDisplayName()),
                                                       new TextMessage("Status message: "
-                                                                      + profile.getStatusMessage())
+                                                                      + profile.getStatusMessage()),
+                                                      new TextMessage("User ID: "
+                                                                      + userId)
                                                      )
                                 );
 
@@ -280,39 +279,6 @@ public class KitchenSinkController {
                 }
                 break;
             }
-            //CUSTOM COMMANDS START HERE
-            
-            // Display command list in PM
-            case "help": {
-                Source source = event.getSource();
-                if (source instanceof GroupSource) {
-                    //if GROUP
-                    this.replyText(replyToken, "");
-                } else if (source instanceof RoomSource) {
-                    //if ROOM
-                    this.replyText(replyToken, "");
-                } else {
-                    //if PM
-                    this.replyText(replyToken, "help, someOtherCommand");
-                }
-                break;
-            }
-            // Display command list in Groups or Rooms
-            case "!help": {
-                Source source = event.getSource();
-                if (source instanceof GroupSource) {
-                    //if GROUP
-                    this.replyText(replyToken, "!help, !kick");
-                } else if (source instanceof RoomSource) {
-                    //if ROOM
-                    this.replyText(replyToken, "!help, !kick");
-                } else {
-                    //if PM
-                    this.replyText(replyToken, "");
-                }
-                break;
-            }
-            // Remove the bot from a Group or a Room
             case "!kick": {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
@@ -322,11 +288,26 @@ public class KitchenSinkController {
                     this.replyText(replyToken, "This wasn't a real group anyway.");
                     lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get();
                 } else {
-                    this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+                    //this.replyText(replyToken, "Bot can't leave from 1:1 chat");
                 }
                 break;
             }
-
+/*
+:TEMPLATE:
+            case "!kick": {
+                Source source = event.getSource();
+                if (source instanceof GroupSource) {
+                    this.replyText(replyToken, "All I ever asked was to be loved by someone.");
+                    lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get();
+                } else if (source instanceof RoomSource) {
+                    this.replyText(replyToken, "This wasn't a real group anyway.");
+                    lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get();
+                } else {
+                    //this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+                }
+                break;
+            }
+*/
             case "__confirm": {
                 ConfirmTemplate confirmTemplate = new ConfirmTemplate(
                         "Do it?",
@@ -462,6 +443,12 @@ public class KitchenSinkController {
                 break;
             default:
                 log.info("No response to input: {}", text);
+                /*
+                this.replyText(
+                        replyToken,
+                        text
+                );
+                */
                 break;
         }
     }
