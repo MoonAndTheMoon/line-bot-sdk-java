@@ -99,17 +99,20 @@ public class KitchenSinkController {
     @EventMapping
     public void handleLocationMessageEvent(MessageEvent<LocationMessageContent> event) {
         LocationMessageContent locationMessage = event.getMessage();
+        /*
         reply(event.getReplyToken(), new LocationMessage(
                 locationMessage.getTitle(),
                 locationMessage.getAddress(),
                 locationMessage.getLatitude(),
                 locationMessage.getLongitude()
         ));
+        */
     }
 
     @EventMapping
     public void handleImageMessageEvent(MessageEvent<ImageMessageContent> event) throws IOException {
         // You need to install ImageMagick
+        /*
         handleHeavyContent(
                 event.getReplyToken(),
                 event.getMessage().getId(),
@@ -124,10 +127,12 @@ public class KitchenSinkController {
                     reply(((MessageEvent) event).getReplyToken(),
                           new ImageMessage(jpg.getUri(), jpg.getUri()));
                 });
+                */
     }
 
     @EventMapping
     public void handleAudioMessageEvent(MessageEvent<AudioMessageContent> event) throws IOException {
+        /*
         handleHeavyContent(
                 event.getReplyToken(),
                 event.getMessage().getId(),
@@ -135,11 +140,13 @@ public class KitchenSinkController {
                     DownloadedContent mp4 = saveContent("mp4", responseBody);
                     reply(event.getReplyToken(), new AudioMessage(mp4.getUri(), 100));
                 });
+                */
     }
 
     @EventMapping
     public void handleVideoMessageEvent(MessageEvent<VideoMessageContent> event) throws IOException {
         // You need to install ffmpeg and ImageMagick.
+        /*
         handleHeavyContent(
                 event.getReplyToken(),
                 event.getMessage().getId(),
@@ -152,23 +159,26 @@ public class KitchenSinkController {
                     reply(((MessageEvent) event).getReplyToken(),
                           new VideoMessage(mp4.getUri(), previewImg.uri));
                 });
+                */
     }
 
     @EventMapping
     public void handleUnfollowEvent(UnfollowEvent event) {
-        log.info("unfollowed this bot: {}", event);
+        log.info("User {} unfollowed this bot.", event);
     }
 
     @EventMapping
     public void handleFollowEvent(FollowEvent event) {
         String replyToken = event.getReplyToken();
-        this.replyText(replyToken, "Got followed event");
+        //When the bot is either added as friend or unblocked
+        this.replyText(replyToken, "You can type \"help\" for a list of available commands.");
     }
 
     @EventMapping
     public void handleJoinEvent(JoinEvent event) {
         String replyToken = event.getReplyToken();
-        this.replyText(replyToken, "Joined " + event.getSource());
+        //When the bot joins a Group or Room
+        this.replyText(replyToken, "You can type \"!help\" for a list of available commands.");
     }
 
     @EventMapping
@@ -180,7 +190,7 @@ public class KitchenSinkController {
     @EventMapping
     public void handleBeaconEvent(BeaconEvent event) {
         String replyToken = event.getReplyToken();
-        this.replyText(replyToken, "Got beacon message " + event.getBeacon().getHwid());
+        //this.replyText(replyToken, "Got beacon message " + event.getBeacon().getHwid());
     }
 
     @EventMapping
@@ -207,14 +217,15 @@ public class KitchenSinkController {
         if (replyToken.isEmpty()) {
             throw new IllegalArgumentException("replyToken must not be empty");
         }
-        if (message.length() > 1000) {
-            message = message.substring(0, 1000 - 2) + "……";
+        if (message.length() > 2000) {
+            message = message.substring(0, 2000 - 2) + "……";
         }
         this.reply(replyToken, new TextMessage(message));
     }
 
     private void handleHeavyContent(String replyToken, String messageId,
                                     Consumer<MessageContentResponse> messageConsumer) {
+        /*
         final MessageContentResponse response;
         try {
             response = lineMessagingClient.getMessageContent(messageId)
@@ -224,20 +235,24 @@ public class KitchenSinkController {
             throw new RuntimeException(e);
         }
         messageConsumer.accept(response);
+        */
     }
 
     private void handleSticker(String replyToken, StickerMessageContent content) {
+        /*
         reply(replyToken, new StickerMessage(
                 content.getPackageId(), content.getStickerId())
         );
+        */
     }
 
     private void handleTextContent(String replyToken, Event event, TextMessageContent content)
             throws Exception {
         String text = content.getText();
+        String text2 = text.toLowerCase();
 
         log.info("Got text message from {}: {}", replyToken, text);
-        switch (text) {
+        switch (text2) {
             case "__profile": {
                 String userId = event.getSource().getUserId();
                 if (userId != null) {
@@ -262,7 +277,7 @@ public class KitchenSinkController {
 
                             });
                 } else {
-                    this.replyText(replyToken, "Bot can't use profile API without user ID");
+                    //this.replyText(replyToken, "Bot can't use profile API without user ID");
                 }
                 break;
             }
@@ -279,6 +294,37 @@ public class KitchenSinkController {
                 }
                 break;
             }
+            //CUSTOM COMMANDS START HERE
+            
+            case "help": {
+                Source source = event.getSource();
+                if (source instanceof GroupSource) {
+                    //if GROUP
+                    //this.replyText(replyToken, "");
+                } else if (source instanceof RoomSource) {
+                    //if ROOM
+                    //this.replyText(replyToken, "");
+                } else {
+                    //if PM
+                    this.replyText(replyToken, "help\r\nnewLineTest");
+                }
+                break;
+            }
+            case "!help": {
+                Source source = event.getSource();
+                if (source instanceof GroupSource) {
+                    //if GROUP
+                    //this.replyText(replyToken, "");
+                } else if (source instanceof RoomSource) {
+                    //if ROOM
+                    //this.replyText(replyToken, "");
+                } else {
+                    //if PM
+                    //this.replyText(replyToken, "");
+                }
+                break;
+            }
+            // Remove the bot from a Group or a Room
             case "!kick": {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
@@ -293,20 +339,22 @@ public class KitchenSinkController {
                 break;
             }
 /*
-:TEMPLATE:
+::TEMPLATE::
             case "!kick": {
                 Source source = event.getSource();
                 if (source instanceof GroupSource) {
-                    this.replyText(replyToken, "All I ever asked was to be loved by someone.");
-                    lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get();
+                    //if GROUP
+                    //this.replyText(replyToken, "");
                 } else if (source instanceof RoomSource) {
-                    this.replyText(replyToken, "This wasn't a real group anyway.");
-                    lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get();
+                    //if ROOM
+                    //this.replyText(replyToken, "");
                 } else {
-                    //this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+                    //if PM
+                    //this.replyText(replyToken, "");
                 }
                 break;
             }
+::END TEMPLATE::
 */
             case "__confirm": {
                 ConfirmTemplate confirmTemplate = new ConfirmTemplate(
