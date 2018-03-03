@@ -434,7 +434,7 @@ public class KitchenSinkController {
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
-					this.replyText(replyToken, "!help, !kick, !drama"); //text reply
+					this.replyText(replyToken, "!help, !kick, !drama, !userid, !groupid"); //text reply
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
@@ -468,6 +468,75 @@ public class KitchenSinkController {
 				} else {
 					//PM specific
 					this.replyText(replyToken, "help, (that's all)");
+				}
+				break;
+			}
+			case "!userid": {
+				Source source = event.getSource();
+				//COMMON
+				String userId = source.getUserId();
+				this.replyText(replyToken, userId); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					//this.replyText(replyToken, ""); //text reply
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+				}
+				break;
+			}
+			case "!groupid": {
+				Source source = event.getSource();
+				//COMMON
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					//this.replyText(replyToken, ""); //text reply
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						String groupId = source.getSenderId();
+						this.replyText(replyToken, groupId); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+				}
+				break;
+			}
+			case "!roomid": {
+				Source source = event.getSource();
+				//COMMON
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					//this.replyText(replyToken, ""); //text reply
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						String roomId = source.getSenderId();
+						this.replyText(replyToken, roomId); //text reply
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
 				}
 				break;
 			}
