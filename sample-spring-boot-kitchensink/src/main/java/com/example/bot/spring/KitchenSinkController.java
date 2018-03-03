@@ -110,48 +110,21 @@ public class KitchenSinkController {
 	@EventMapping
 	public void handleImageMessageEvent(MessageEvent<ImageMessageContent> event) throws IOException {
 		// You need to install ImageMagick
-		handleHeavyContent(
-				event.getReplyToken(),
-				event.getMessage().getId(),
-				responseBody -> {
-					DownloadedContent jpg = saveContent("jpg", responseBody);
-					DownloadedContent previewImg = createTempFile("jpg");
-					system(
-							"convert",
-							"-resize", "240x",
-							jpg.path.toString(),
-							previewImg.path.toString());
-					reply(((MessageEvent) event).getReplyToken(),
-						  new ImageMessage(jpg.getUri(), jpg.getUri()));
-				});
+		String replyToken = event.getReplyToken();
+		String str2 = replyToken;
 	}
 
 	@EventMapping
 	public void handleAudioMessageEvent(MessageEvent<AudioMessageContent> event) throws IOException {
-		handleHeavyContent(
-				event.getReplyToken(),
-				event.getMessage().getId(),
-				responseBody -> {
-					DownloadedContent mp4 = saveContent("mp4", responseBody);
-					reply(event.getReplyToken(), new AudioMessage(mp4.getUri(), 100));
-				});
+		String replyToken = event.getReplyToken();
+		String str2 = replyToken;
 	}
 
 	@EventMapping
 	public void handleVideoMessageEvent(MessageEvent<VideoMessageContent> event) throws IOException {
 		// You need to install ffmpeg and ImageMagick.
-		handleHeavyContent(
-				event.getReplyToken(),
-				event.getMessage().getId(),
-				responseBody -> {
-					DownloadedContent mp4 = saveContent("mp4", responseBody);
-					DownloadedContent previewImg = createTempFile("jpg");
-					system("convert",
-						   mp4.path + "[0]",
-						   previewImg.path.toString());
-					reply(((MessageEvent) event).getReplyToken(),
-						  new VideoMessage(mp4.getUri(), previewImg.uri));
-				});
+		String replyToken = event.getReplyToken();
+		String str2 = replyToken;
 	}
 
 	@EventMapping
