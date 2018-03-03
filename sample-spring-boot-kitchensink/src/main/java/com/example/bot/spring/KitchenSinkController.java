@@ -137,7 +137,7 @@ public class KitchenSinkController {
 	public void handleFollowEvent(FollowEvent event) {
 		String replyToken = event.getReplyToken();
 		//
-		this.replyText(replyToken, "Write \"help\" for a list of available commands");
+		this.replyText(replyToken, "Write \"help\" for a list of available commands.\r\nIn groups, all commands start with \"!\".");
 	}
 
 	@EventMapping
