@@ -174,7 +174,7 @@ public class KitchenSinkController {
 	@EventMapping
 	public void handlePostbackEvent(PostbackEvent event) {
 		String replyToken = event.getReplyToken();
-		this.replyText(replyToken, "Got postback data " + event.getPostbackContent().getData() + ", param " + event.getPostbackContent().getParams().toString());
+		//this.replyText(replyToken, "Got postback data " + event.getPostbackContent().getData() + ", param " + event.getPostbackContent().getParams().toString());
 	}
 
 	@EventMapping
@@ -254,9 +254,7 @@ public class KitchenSinkController {
 										Arrays.asList(new TextMessage(
 															  "Display name: " + profile.getDisplayName()),
 													  new TextMessage("Status message: "
-																	  + profile.getStatusMessage()),
-													  new TextMessage("User ID: "
-																	  + userId)
+																	  + profile.getStatusMessage())
 													 )
 								);
 
@@ -420,6 +418,27 @@ public class KitchenSinkController {
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+						lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get(); //leave group
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+						lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get(); //leave room
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "");
+				}
+				break;
+			}
+			case "!drama": {
+				Source source = event.getSource();
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
 						this.replyText(replyToken, "All I ever asked was to be loved by someone."); //text reply
 						lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get(); //leave group
 					} else if (source instanceof RoomSource) {
@@ -429,7 +448,7 @@ public class KitchenSinkController {
 					}
 				} else {
 					//PM specific
-					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+					//this.replyText(replyToken, "");
 				}
 				break;
 			}
