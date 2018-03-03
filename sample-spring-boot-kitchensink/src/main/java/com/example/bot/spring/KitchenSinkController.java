@@ -414,10 +414,12 @@ public class KitchenSinkController {
                 break;
             default:
                 log.info("Returns (no, it is commented) echo message {}: {}", replyToken, text);
-                //this.replyText(
-                        //replyToken,
-                        //text
-                //);
+                /*
+                this.replyText(
+                        replyToken,
+                        text
+                );
+                */
                 break;
         }
     }
