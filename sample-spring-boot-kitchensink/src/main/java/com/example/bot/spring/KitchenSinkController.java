@@ -437,7 +437,7 @@ public class KitchenSinkController {
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
-					this.replyText(replyToken, "!help, !kick, !drama, !userid, !groupid"); //text reply
+					this.replyText(replyToken, "!help, !kick, !drama, !userid, \r\n!groupid, !shdb"); //text reply
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
@@ -470,7 +470,7 @@ public class KitchenSinkController {
 					}
 				} else {
 					//PM specific
-					this.replyText(replyToken, "help, userid");
+					this.replyText(replyToken, "help, userid, shdb");
 				}
 				break;
 			}
@@ -563,6 +563,50 @@ public class KitchenSinkController {
 				} else {
 					//PM specific
 					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+				}
+				break;
+			}
+			case "!shdb": {
+				Source source = event.getSource();
+				//COMMON
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					this.replyText(replyToken, "line://oaMessage/@eko8036y/?shdb%20help"); //text reply
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+				}
+				break;
+			}
+			case "shdb": {
+				Source source = event.getSource();
+				//COMMON
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					//this.replyText(replyToken, ""); //text reply
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					this.replyText(replyToken, "line://oaMessage/@eko8036y/?shdb%20help");
 				}
 				break;
 			}
