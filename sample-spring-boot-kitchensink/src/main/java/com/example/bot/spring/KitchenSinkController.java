@@ -454,6 +454,7 @@ public class KitchenSinkController {
 					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
 				}
 				break;
+			}
 			case "help": {
 				Source source = event.getSource();
 				//COMMON
@@ -475,7 +476,6 @@ public class KitchenSinkController {
 					this.replyText(replyToken, "A command list in PM.");
 				}
 				break;
-			}
 			}
 			default:
 				log.info("Returns (no, it is commented) echo message {}: {}", replyToken, text);
