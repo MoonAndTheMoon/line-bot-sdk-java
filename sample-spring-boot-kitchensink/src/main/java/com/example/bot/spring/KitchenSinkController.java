@@ -414,16 +414,68 @@ public class KitchenSinkController {
 				break;
 			case "!kick": {
 				Source source = event.getSource();
-				if (source instanceof GroupSource) {
-					this.replyText(replyToken, "All I ever asked was to be loved by someone.");
-					lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get();
-				} else if (source instanceof RoomSource) {
-					this.replyText(replyToken, "This wasn't a real group anyway.");
-					lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get();
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						this.replyText(replyToken, "All I ever asked was to be loved by someone."); //text reply
+						lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get(); //leave group
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						this.replyText(replyToken, "This wasn't a real group anyway."); //text reply
+						lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get(); //leave room
+					}
 				} else {
+					//PM specific
 					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
 				}
 				break;
+			}
+			case "!help": {
+				Source source = event.getSource();
+				//COMMON
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					this.replyText(replyToken, "A command list in group or room."); //text reply
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+				}
+				break;
+			case "help": {
+				Source source = event.getSource();
+				//COMMON
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					//this.replyText(replyToken, ""); //text reply
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					this.replyText(replyToken, "A command list in PM.");
+				}
+				break;
+			}
 			}
 			default:
 				log.info("Returns (no, it is commented) echo message {}: {}", replyToken, text);
