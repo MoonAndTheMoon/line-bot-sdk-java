@@ -695,7 +695,7 @@ public class KitchenSinkController {
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM
-					if (userId == adminId) {
+					if (userId.equals(adminId)) {
 						this.replyText(replyToken, "match"); //text reply
 					} else {
 						this.replyText(replyToken, "not match"); //text reply
