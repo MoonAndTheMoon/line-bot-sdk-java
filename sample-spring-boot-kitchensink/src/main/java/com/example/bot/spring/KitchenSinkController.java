@@ -93,7 +93,8 @@ public class KitchenSinkController {
 
 	@EventMapping
 	public void handleStickerMessageEvent(MessageEvent<StickerMessageContent> event) {
-		handleSticker(event.getReplyToken(), event.getMessage());
+		String replyToken = event.getReplyToken();
+		String str2 = replyToken;
 	}
 
 	@EventMapping
@@ -142,8 +143,9 @@ public class KitchenSinkController {
 	@EventMapping
 	public void handleJoinEvent(JoinEvent event) {
 		String replyToken = event.getReplyToken();
+		String str2 = replyToken;
 		//
-		this.replyText(replyToken, "Write \"!help\" for a list of available commands");
+		//this.replyText(replyToken, "Write \"!help\" for a list of available commands");
 	}
 
 	@EventMapping
@@ -467,19 +469,19 @@ public class KitchenSinkController {
 					}
 				} else {
 					//PM specific
-					this.replyText(replyToken, "help, (that's all)");
+					this.replyText(replyToken, "help, userid");
 				}
 				break;
 			}
 			case "!userid": {
 				Source source = event.getSource();
 				//COMMON
-				String userId = source.getUserId();
-				this.replyText(replyToken, userId); //text reply
+				
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
-					//this.replyText(replyToken, ""); //text reply
+					String userId = source.getUserId();
+					this.replyText(replyToken, userId); //text reply
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
@@ -491,6 +493,29 @@ public class KitchenSinkController {
 				} else {
 					//PM specific
 					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+				}
+				break;
+			}
+			case "userid": {
+				Source source = event.getSource();
+				//COMMON
+				//
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					//
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					String userId = source.getUserId();
+					this.replyText(replyToken, userId); //text reply
 				}
 				break;
 			}
