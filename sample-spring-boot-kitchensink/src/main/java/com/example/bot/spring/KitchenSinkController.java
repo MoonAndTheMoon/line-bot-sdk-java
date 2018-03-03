@@ -412,6 +412,19 @@ public class KitchenSinkController {
                         )
                 ));
                 break;
+            case "!kick": {
+                Source source = event.getSource();
+                if (source instanceof GroupSource) {
+                    this.replyText(replyToken, "All I ever asked was to be loved by someone.");
+                    lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get();
+                } else if (source instanceof RoomSource) {
+                    this.replyText(replyToken, "This wasn't a real group anyway.");
+                    lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get();
+                } else {
+                    //this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+                }
+                break;
+            }
             default:
                 log.info("Returns (no, it is commented) echo message {}: {}", replyToken, text);
                 /*
