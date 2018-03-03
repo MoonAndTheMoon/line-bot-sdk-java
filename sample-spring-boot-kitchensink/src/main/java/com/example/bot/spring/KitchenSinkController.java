@@ -184,8 +184,8 @@ public class KitchenSinkController {
 		if (replyToken.isEmpty()) {
 			throw new IllegalArgumentException("replyToken must not be empty");
 		}
-		if (message.length() > 1000) {
-			message = message.substring(0, 1000 - 2) + "……";
+		if (message.length() > 2000) {
+			message = message.substring(0, 2000 - 2) + "……";
 		}
 		this.reply(replyToken, new TextMessage(message));
 	}
@@ -683,6 +683,34 @@ public class KitchenSinkController {
 							""
 							*/
 							); //text reply
+				}
+				break;
+			}
+			case "_test": {
+				Source source = event.getSource();
+				//COMMON
+				String userId = source.getUserId();
+				String adminId = "U6488c0b14ee41d8c589c0bdc66d6c55e"
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM
+					if (userId == adminId) {
+						this.replyText(replyToken, "match"); //text reply
+					} else {
+						this.replyText(replyToken, "not match"); //text reply
+					}
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
 				}
 				break;
 			}
