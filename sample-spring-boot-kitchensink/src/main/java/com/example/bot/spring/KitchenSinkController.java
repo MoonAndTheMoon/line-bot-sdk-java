@@ -437,7 +437,7 @@ public class KitchenSinkController {
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
-					this.replyText(replyToken, "!help, !kick, !drama, !userid, \r\n!groupid, !shdb"); //text reply
+					this.replyText(replyToken, "!help, !kick, !drama, !userid, !groupid, !shdb, !energy"); //text reply
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
@@ -448,7 +448,7 @@ public class KitchenSinkController {
 					}
 				} else {
 					//PM specific
-					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+					//this.replyText(replyToken, "");
 				}
 				break;
 			}
@@ -470,7 +470,7 @@ public class KitchenSinkController {
 					}
 				} else {
 					//PM specific
-					this.replyText(replyToken, "help, userid, shdb");
+					this.replyText(replyToken, "help, userid, shdb, energy");
 				}
 				break;
 			}
@@ -607,6 +607,82 @@ public class KitchenSinkController {
 				} else {
 					//PM specific
 					this.replyText(replyToken, "line://oaMessage/@eko8036y/?shdb%20help");
+				}
+				break;
+			}
+			case "!energy": {
+				Source source = event.getSource();
+				//COMMON
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					this.replyText(replyToken, "Energy Efficiency:\r\n" + 
+												"—Abilities cost less energy to use.+r+n" + 
+												"—E.g. 5% Energy Efficiency means 50 Energy will be retained when 1000 energy is normally spent.\r\n" +
+												"—It takes 1000 Energy to fill the bar.\r\n" + 
+												"Energy Bonus:" + 
+												"—Increases the Energy gained from receiving damage (and nothing else)." + 
+												"—E.g. 10% Energy Bonus would provide an additional 20 Energy when 200 Energy is normally received." + 
+												"Energy Recovery:" + 
+												"—The Energy received at the end of a wave or a type of a battle that is part of a series of battles where heroes may be used again."
+												/*
+												"" + 
+												"" + 
+												"" + 
+												"" + 
+												""
+												*/
+												); //text reply
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+				}
+				break;
+			}
+			case "energy": {
+				Source source = event.getSource();
+				//COMMON
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM, common code
+					this.replyText(replyToken, "Energy Efficiency:\r\n" + 
+												"—Abilities cost less energy to use.+r+n" + 
+												"—E.g. 5% Energy Efficiency means 50 Energy will be retained when 1000 energy is normally spent.\r\n" +
+												"—It takes 1000 Energy to fill the bar.\r\n" + 
+												"Energy Bonus:" + 
+												"—Increases the Energy gained from receiving damage (and nothing else)." + 
+												"—E.g. 10% Energy Bonus would provide an additional 20 Energy when 200 Energy is normally received." + 
+												"Energy Recovery:" + 
+												"—The Energy received at the end of a wave or a type of a battle that is part of a series of battles where heroes may be used again."
+												/*
+												"" + 
+												"" + 
+												"" + 
+												"" + 
+												""
+												*/
+												); //text reply
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
 				}
 				break;
 			}
