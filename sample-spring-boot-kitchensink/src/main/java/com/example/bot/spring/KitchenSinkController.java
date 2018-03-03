@@ -655,23 +655,7 @@ public class KitchenSinkController {
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
-					this.replyText(replyToken, "Energy Efficiency:\r\n" + 
-												"—Abilities cost less energy to use.\r\n" + 
-												"—E.g. 5% Energy Efficiency means 50 Energy will be retained when 1000 energy is normally spent.\r\n" +
-												"—It takes 1000 Energy to fill the bar.\r\n" + 
-												"Energy Bonus:\r\n" + 
-												"—Increases the Energy gained from receiving damage (and nothing else).\r\n" + 
-												"—E.g. 10% Energy Bonus would provide an additional 20 Energy when 200 Energy is normally received.\r\n" + 
-												"Energy Recovery:\r\n" + 
-												"—The Energy received at the end of a wave or a type of a battle that is part of a series of battles where heroes may be used again.\r\n"
-												/*
-												"" + 
-												"" + 
-												"" + 
-												"" + 
-												""
-												*/
-												); //text reply
+					//
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
@@ -682,7 +666,23 @@ public class KitchenSinkController {
 					}
 				} else {
 					//PM specific
-					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+					this.replyText(replyToken, "Energy Efficiency:\r\n" + 
+							"—Abilities cost less energy to use.\r\n" + 
+							"—E.g. 5% Energy Efficiency means 50 Energy will be retained when 1000 energy is normally spent.\r\n" +
+							"—It takes 1000 Energy to fill the bar.\r\n" + 
+							"Energy Bonus:\r\n" + 
+							"—Increases the Energy gained from receiving damage (and nothing else).\r\n" + 
+							"—E.g. 10% Energy Bonus would provide an additional 20 Energy when 200 Energy is normally received.\r\n" + 
+							"Energy Recovery:\r\n" + 
+							"—The Energy received at the end of a wave or a type of a battle that is part of a series of battles where heroes may be used again.\r\n"
+							/*
+							"" + 
+							"" + 
+							"" + 
+							"" + 
+							""
+							*/
+							); //text reply
 				}
 				break;
 			}
