@@ -162,13 +162,15 @@ public class KitchenSinkController {
 	@EventMapping
 	public void handleFollowEvent(FollowEvent event) {
 		String replyToken = event.getReplyToken();
-		this.replyText(replyToken, "Got followed event");
+		//
+		this.replyText(replyToken, "Write \"help\" for a list of available commands");
 	}
 
 	@EventMapping
 	public void handleJoinEvent(JoinEvent event) {
 		String replyToken = event.getReplyToken();
-		this.replyText(replyToken, "Joined " + event.getSource());
+		//
+		this.replyText(replyToken, "Write \"!help\" for a list of available commands");
 	}
 
 	@EventMapping
@@ -180,7 +182,7 @@ public class KitchenSinkController {
 	@EventMapping
 	public void handleBeaconEvent(BeaconEvent event) {
 		String replyToken = event.getReplyToken();
-		this.replyText(replyToken, "Got beacon message " + event.getBeacon().getHwid());
+		String str2 = replyToken;
 	}
 
 	@EventMapping
@@ -439,11 +441,11 @@ public class KitchenSinkController {
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
-						this.replyText(replyToken, "All I ever asked was to be loved by someone."); //text reply
+						this.replyText(replyToken, "All I ever asked was to be loved by someone!!!"); //text reply
 						lineMessagingClient.leaveGroup(((GroupSource) source).getGroupId()).get(); //leave group
 					} else if (source instanceof RoomSource) {
 						//ROOM specific
-						this.replyText(replyToken, "This wasn't a real group anyway."); //text reply
+						this.replyText(replyToken, "This wasn't a real group anyway..."); //text reply
 						lineMessagingClient.leaveRoom(((RoomSource) source).getRoomId()).get(); //leave room
 					}
 				} else {
@@ -459,7 +461,7 @@ public class KitchenSinkController {
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
-					this.replyText(replyToken, "A command list in group or room."); //text reply
+					this.replyText(replyToken, "!help, !kick, !drama"); //text reply
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
@@ -492,7 +494,7 @@ public class KitchenSinkController {
 					}
 				} else {
 					//PM specific
-					this.replyText(replyToken, "A command list in PM.");
+					this.replyText(replyToken, "help, (that's all)");
 				}
 				break;
 			}
