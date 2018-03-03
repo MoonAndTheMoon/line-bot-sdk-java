@@ -618,14 +618,14 @@ public class KitchenSinkController {
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
 					this.replyText(replyToken, "Energy Efficiency:\r\n" + 
-												"—Abilities cost less energy to use.+r+n" + 
+												"—Abilities cost less energy to use.\r\n" + 
 												"—E.g. 5% Energy Efficiency means 50 Energy will be retained when 1000 energy is normally spent.\r\n" +
 												"—It takes 1000 Energy to fill the bar.\r\n" + 
-												"Energy Bonus:" + 
-												"—Increases the Energy gained from receiving damage (and nothing else)." + 
-												"—E.g. 10% Energy Bonus would provide an additional 20 Energy when 200 Energy is normally received." + 
-												"Energy Recovery:" + 
-												"—The Energy received at the end of a wave or a type of a battle that is part of a series of battles where heroes may be used again."
+												"Energy Bonus:\r\n" + 
+												"—Increases the Energy gained from receiving damage (and nothing else).\r\n" + 
+												"—E.g. 10% Energy Bonus would provide an additional 20 Energy when 200 Energy is normally received.\r\n" + 
+												"Energy Recovery:\r\n" + 
+												"—The Energy received at the end of a wave or a type of a battle that is part of a series of battles where heroes may be used again.\r\n"
 												/*
 												"" + 
 												"" + 
@@ -656,14 +656,14 @@ public class KitchenSinkController {
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
 					this.replyText(replyToken, "Energy Efficiency:\r\n" + 
-												"—Abilities cost less energy to use.+r+n" + 
+												"—Abilities cost less energy to use.\r\n" + 
 												"—E.g. 5% Energy Efficiency means 50 Energy will be retained when 1000 energy is normally spent.\r\n" +
 												"—It takes 1000 Energy to fill the bar.\r\n" + 
-												"Energy Bonus:" + 
-												"—Increases the Energy gained from receiving damage (and nothing else)." + 
-												"—E.g. 10% Energy Bonus would provide an additional 20 Energy when 200 Energy is normally received." + 
-												"Energy Recovery:" + 
-												"—The Energy received at the end of a wave or a type of a battle that is part of a series of battles where heroes may be used again."
+												"Energy Bonus:\r\n" + 
+												"—Increases the Energy gained from receiving damage (and nothing else).\r\n" + 
+												"—E.g. 10% Energy Bonus would provide an additional 20 Energy when 200 Energy is normally received.\r\n" + 
+												"Energy Recovery:\r\n" + 
+												"—The Energy received at the end of a wave or a type of a battle that is part of a series of battles where heroes may be used again.\r\n"
 												/*
 												"" + 
 												"" + 
