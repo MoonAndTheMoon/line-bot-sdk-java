@@ -690,7 +690,7 @@ public class KitchenSinkController {
 				Source source = event.getSource();
 				//COMMON
 				String userId = source.getUserId();
-				String adminId = "U6488c0b14ee41d8c589c0bdc66d6c55e"
+				String adminId = "U6488c0b14ee41d8c589c0bdc66d6c55e";
 				//this.replyText(replyToken, ""); //text reply
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
