@@ -212,9 +212,10 @@ public class KitchenSinkController {
 	private void handleTextContent(String replyToken, Event event, TextMessageContent content)
 			throws Exception {
 		String text = content.getText();
+		String text2 = text.toLowerCase();
 
 		log.info("Got text message from {}: {}", replyToken, text);
-		switch (text) {
+		switch (text2) {
 			case "__profile": {
 				String userId = event.getSource().getUserId();
 				if (userId != null) {
