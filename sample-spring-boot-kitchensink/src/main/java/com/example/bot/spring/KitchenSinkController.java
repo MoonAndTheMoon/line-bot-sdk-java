@@ -226,7 +226,7 @@ public class KitchenSinkController {
 					sbStr.append("%20");
 				sbStr.append(splitStr[i]);
 			}
-			remString = sbStr.toString();
+			remString = "?shdb%20" + sbStr.toString();
 		} else {
 			remString = "";
 		}
@@ -590,7 +590,7 @@ public class KitchenSinkController {
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
-					this.replyText(replyToken, "line://oaMessage/@eko8036y/?shdb%20" + remString); //text reply
+					this.replyText(replyToken, "line://oaMessage/@eko8036y/" + remString); //text reply
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
@@ -623,7 +623,7 @@ public class KitchenSinkController {
 					}
 				} else {
 					//PM specific
-					this.replyText(replyToken, "line://oaMessage/@eko8036y/?shdb%20" + remString);
+					this.replyText(replyToken, "line://oaMessage/@eko8036y/" + remString);
 				}
 				break;
 			}
