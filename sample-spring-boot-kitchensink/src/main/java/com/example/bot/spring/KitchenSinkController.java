@@ -212,10 +212,28 @@ public class KitchenSinkController {
 	private void handleTextContent(String replyToken, Event event, TextMessageContent content)
 			throws Exception {
 		String text = content.getText();
-		String text2 = text.toLowerCase();
+		String textLower = text.toLowerCase();
+		//split
+		String[] splitStr = textLower.trim().split("\\s+");
+		//isolate command
+		String command = splitStr[0];
+		//remove first element
+		ArrayList<String> nList = new ArrayList<>(Arrays.asList(splitStr));
+		nList.remove(0);
+		nStrings = new String[nList.size()];
+		nList.toArray(nStrings);
+		//rebuild remainder for url
+		StringBuilder builder = new StringBuilder();
+		for (String string : nStrings) {
+			if (builder.length() > 0) {
+				builder.append("%20");
+			}
+			builder.append(string);
+		}
+		String remString = builder.toString();
 
 		log.info("Got text message from {}: {}", replyToken, text);
-		switch (text2) {
+		switch (command) {
 			case "__profile": {
 				String userId = event.getSource().getUserId();
 				if (userId != null) {
@@ -573,7 +591,7 @@ public class KitchenSinkController {
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM, common code
-					this.replyText(replyToken, "line://oaMessage/@eko8036y/?shdb%20help"); //text reply
+					this.replyText(replyToken, "line://oaMessage/@eko8036y/?shdb%20" + remString); //text reply
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
@@ -606,7 +624,7 @@ public class KitchenSinkController {
 					}
 				} else {
 					//PM specific
-					this.replyText(replyToken, "line://oaMessage/@eko8036y/?shdb%20help");
+					this.replyText(replyToken, "line://oaMessage/@eko8036y/?shdb%20" + remString);
 				}
 				break;
 			}
