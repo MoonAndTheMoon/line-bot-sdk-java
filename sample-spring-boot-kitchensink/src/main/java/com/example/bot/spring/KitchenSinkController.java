@@ -219,7 +219,7 @@ public class KitchenSinkController {
 		String command = splitStr[0];
 		//rebuild remainder
 		String remString = null;
-		if (splitStr.size() > 1) {
+		if (splitStr.length > 1) {
 			StringBuilder sbStr = new StringBuilder();
 			for (int i = 1, il = splitStr.length; i < il; i++) {
 				if (i > 0)
