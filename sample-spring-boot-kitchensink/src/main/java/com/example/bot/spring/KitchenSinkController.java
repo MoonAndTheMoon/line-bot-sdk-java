@@ -222,7 +222,7 @@ public class KitchenSinkController {
 		if (splitStr.length > 1) {
 			StringBuilder sbStr = new StringBuilder();
 			for (int i = 1, il = splitStr.length; i < il; i++) {
-				if (i > 0)
+				if (i > 1)
 					sbStr.append("%20");
 				sbStr.append(splitStr[i]);
 			}
