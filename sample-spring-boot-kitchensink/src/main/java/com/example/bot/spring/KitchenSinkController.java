@@ -217,20 +217,19 @@ public class KitchenSinkController {
 		String[] splitStr = textLower.trim().split("\\s+");
 		//isolate command
 		String command = splitStr[0];
-		//remove first element
-		ArrayList<String> nList = new ArrayList<>(Arrays.asList(splitStr));
-		nList.remove(0);
-		nStrings = new String[nList.size()];
-		nList.toArray(nStrings);
-		//rebuild remainder for url
-		StringBuilder builder = new StringBuilder();
-		for (String string : nStrings) {
-			if (builder.length() > 0) {
-				builder.append("%20");
+		//rebuild remainder
+		String remString = null;
+		if (splitStr.size() > 1) {
+			StringBuilder sbStr = new StringBuilder();
+			for (int i = 1, il = splitStr.length; i < il; i++) {
+				if (i > 0)
+					sbStr.append("%20");
+				sbStr.append(splitStr[i]);
 			}
-			builder.append(string);
+			remString = sbStr.toString();
+		} else {
+			remString = "";
 		}
-		String remString = builder.toString();
 
 		log.info("Got text message from {}: {}", replyToken, text);
 		switch (command) {
