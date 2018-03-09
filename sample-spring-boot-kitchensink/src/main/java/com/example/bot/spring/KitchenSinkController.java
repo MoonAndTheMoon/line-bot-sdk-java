@@ -737,6 +737,7 @@ public class KitchenSinkController {
 					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
 				}
 				break;
+			}
 			case "_test": {
 				Source source = event.getSource();
 				//COMMON
