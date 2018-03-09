@@ -712,8 +712,6 @@ public class KitchenSinkController {
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
 					//GROUP or ROOM
-					//http://tinyurl.com/patch24x
-					//http://tinyurl.com/CH-shares0022
 					String groupId = source.getSenderId();
 					if (groupId.equals(groupSoHu)) {
 						if (splitStr.length > 2) {
@@ -722,8 +720,16 @@ public class KitchenSinkController {
 							} else if (splitStr[1].equals("2")) {
 								this.replyText(replyToken, splitStr[2] + ":\r\nhttp://tinyurl.com/CH-shares0022"); //text reply
 							}
+						} else if (splitStr.length > 1) {
+							if (splitStr[1].equals("3")) {
+								this.replyText(replyToken,"Server List 2 and Script:\r\nhttp://cdn.sh.lilithgame.com/2.4/usaand.iPhone/backdoor.txt"); //text reply
+							} else if (splitStr[1].equals("4")) {
+								this.replyText(replyToken, "Version List SH:\r\nhttp://cdn.sh.lilithgame.com/2.4/usaand.iPhone/versionList.txt"); //text reply
+							} else if (splitStr[1].equals("5")) {
+								this.replyText(replyToken, "Version List China:\r\nhttp://dir.dota.lilith.sh:8080/5.0/android.iPhone/versionList.txt"); //text reply
+							}
 						}
-					}
+					}//
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
