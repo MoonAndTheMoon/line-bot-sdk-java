@@ -719,7 +719,7 @@ public class KitchenSinkController {
 						if (splitStr.length > 2) {
 							if (splitStr[1].equals("1")) {
 								this.replyText(replyToken, splitStr[2] + ":\r\nhttp://tinyurl.com/patch24x"); //text reply
-							} elseif (splitStr[1].equals("2")) {
+							} else if (splitStr[1].equals("2")) {
 								this.replyText(replyToken, splitStr[2] + ":\r\nhttp://tinyurl.com/CH-shares0022"); //text reply
 							}
 						}
