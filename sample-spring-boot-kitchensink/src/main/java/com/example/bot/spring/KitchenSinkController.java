@@ -715,7 +715,7 @@ public class KitchenSinkController {
 					//http://tinyurl.com/patch24x
 					//http://tinyurl.com/CH-shares0022
 					String groupId = source.getSenderId();
-					if (groupId.equals(groupSuHu)) {
+					if (groupId.equals(groupSoHu)) {
 						if (splitStr.length > 2) {
 							if (splitStr[1].equals("1")) {
 								this.replyText(replyToken, splitStr[2] + ":\r\nhttp://tinyurl.com/patch24x"); //text reply
