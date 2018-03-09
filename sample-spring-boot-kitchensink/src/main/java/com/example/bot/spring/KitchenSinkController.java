@@ -230,6 +230,8 @@ public class KitchenSinkController {
 		} else {
 			remString = "";
 		}
+		String adminId = "U6488c0b14ee41d8c589c0bdc66d6c55e";
+		String groupSoHu = "Cf2d1a337999a6d84a83695a065793bc8";
 
 		log.info("Got text message from {}: {}", replyToken, text);
 		switch (command) {
@@ -703,11 +705,42 @@ public class KitchenSinkController {
 				}
 				break;
 			}
+			case "!link": {
+				Source source = event.getSource();
+				//COMMON
+				//this.replyText(replyToken, ""); //text reply
+				//END
+				if (source instanceof GroupSource || source instanceof RoomSource) {
+					//GROUP or ROOM
+					//http://tinyurl.com/patch24x
+					//http://tinyurl.com/CH-shares0022
+					String groupId = source.getSenderId();
+					if (groupId.equals(groupSuHu)) {
+						if (splitStr.length > 2) {
+							if (splitStr[1].equals("1")) {
+								this.replyText(replyToken, splitStr[2] + ":\r\nhttp://tinyurl.com/patch24x"); //text reply
+							} elseif (splitStr[1].equals("2")) {
+								this.replyText(replyToken, splitStr[2] + ":\r\nhttp://tinyurl.com/CH-shares0022"); //text reply
+							}
+						}
+					}
+					//END
+					if (source instanceof GroupSource) {
+						//GROUP specific
+						//this.replyText(replyToken, ""); //text reply
+					} else if (source instanceof RoomSource) {
+						//ROOM specific
+						//this.replyText(replyToken, ""); //text reply
+					}
+				} else {
+					//PM specific
+					//this.replyText(replyToken, "Bot can't leave from 1:1 chat");
+				}
+				break;
 			case "_test": {
 				Source source = event.getSource();
 				//COMMON
 				String userId = source.getUserId();
-				String adminId = "U6488c0b14ee41d8c589c0bdc66d6c55e";
 				//this.replyText(replyToken, ""); //text reply
 				//END
 				if (source instanceof GroupSource || source instanceof RoomSource) {
