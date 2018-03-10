@@ -729,7 +729,13 @@ public class KitchenSinkController {
 								this.replyText(replyToken, "Version List China:\r\nhttp://dir.dota.lilith.sh:8080/5.0/android.iPhone/versionList.txt"); //text reply
 							}
 						}
-					}//
+					} else {
+						if (splitStr.length > 1) {
+							if (splitStr[1].equals("6")) {
+								this.replyText(replyToken,"HoL Videos (Moon):\r\nhttp://tinyurl.com/lineholvids"); //text reply
+							}
+						}
+					}
 					//END
 					if (source instanceof GroupSource) {
 						//GROUP specific
